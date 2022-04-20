@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS hypergeo_db;
+
+CREATE DATABASE hypergeo_db;

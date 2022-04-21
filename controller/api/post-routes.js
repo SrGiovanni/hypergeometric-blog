@@ -68,6 +68,13 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
+    attributes: [
+      'id',
+      'post_text',
+      'title',
+      'created_at',
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+    ],
     include: [
       // include the Comment model here:
       {
@@ -77,12 +84,6 @@ router.get('/:id', (req, res) => {
           model: Post,
           attributes: ['title']
         }
-      },
-      {
-        model: Post,
-        attributes: ['title'],
-        through: Vote,
-        as: 'voted_posts'
       }
     ]
   })

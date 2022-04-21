@@ -39,8 +39,8 @@ Post.init(
         type: DataTypes.STRING,
         allowNull: false
       },
-      content_text: {
-        type: Sequelize.TEXT,
+      post_text: {
+        type: DataTypes.TEXT,
         allowNull: false,
         validate:{
           len: [1]

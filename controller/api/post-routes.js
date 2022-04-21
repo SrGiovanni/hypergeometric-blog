@@ -5,10 +5,10 @@ const sequelize = require('../../config/connection');
 
 // create a post
 router.post('/', withAuth, (req, res) => {
-  // expects {title: 'Taskmaster goes public!', content_text: 'decorum', user_id: 1}
+  // expects {title: 'Taskmaster goes public!', post_text: 'decorum', user_id: 1}
   Post.create({
     title: req.body.title,
-    content_text: req.body.content_text,
+    post_text: req.body.post_text,
     user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
       order: [['created_at', 'DESC']],
       attributes: [
         'id',
-        'post_url',
+        'post_text',
         'title',
         'created_at',
         [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
@@ -64,16 +64,11 @@ router.get('/', (req, res) => {
 
 // get a single post
 router.get('/:id', (req, res) => {
-  User.findOne({
-    attributes: { exclude: ['password'] },
+  Post.findOne({
     where: {
       id: req.params.id
     },
     include: [
-      {
-        model: Post,
-        attributes: ['id', 'title', 'post_url', 'created_at']
-      },
       // include the Comment model here:
       {
         model: Comment,
@@ -97,7 +92,8 @@ router.get('/:id', (req, res) => {
 router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
-      title: req.body.title
+      title: req.body.title,
+      post_text: req.body.post_text
     },
     {
       where: {

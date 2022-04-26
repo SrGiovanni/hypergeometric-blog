@@ -108,6 +108,7 @@ router.put('/:id', withAuth, (req, res) => {
         return;
       }
       res.json(dbPostData);
+      res.redirect('/dashboard');
     })
     .catch(err => {
       console.log(err);
@@ -127,7 +128,8 @@ router.delete('/:id', withAuth, (req, res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(dbPostData);
+      // res.json(dbPostData);
+      res.redirect('/dashboard');
     })
     .catch(err => {
       console.log(err);

@@ -108,7 +108,7 @@ router.put('/:id', withAuth, (req, res) => {
         return;
       }
       res.json(dbPostData);
-      res.redirect('/dashboard');
+      //res.redirect('/dashboard');
     })
     .catch(err => {
       console.log(err);

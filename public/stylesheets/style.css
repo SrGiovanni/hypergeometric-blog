@@ -8,6 +8,8 @@
     margin: 0;
     font-family: sans-serif;
     color: #333;
+    background-color: #ffffcc;
+    border-color: #009999;
   }
   
   a {
@@ -103,6 +105,10 @@
     transition: color .1s;
     margin-left: 16px;
   }
+
+  .login-notBtn {
+    margin-left: 16px;
+  }
   
   .btn-no-style:hover {
     background: none;
@@ -162,11 +168,17 @@
   }
   
   .new-post-form input {
-    width: 300px;
+    width: 500px;
   }
   
   .edit-post-form {
     margin-bottom: 5%;
+  }
+
+  .edit-post-input {
+    display: flex;
+    flex-direction: column;
+    padding-right: 25%;
   }
   
   footer {
